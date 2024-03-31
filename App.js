@@ -14,9 +14,9 @@ function HomeScreen({ navigation }) {
 
 
   const menuItems = [
-    { id: '1', title: 'DS&A Quick Quiz', screen: 'DataStructures' },
-    { id: '2', title: 'Algorithm Complexity Analysis', screen: 'AlgoAnalysis' },
-    { id: '3', title: 'Spot the Bug', screen: 'SpotTheBug' },
+    { id: '1', title: 'DS&A Quick Quiz', screen: 'DataStructures' }, // Will use Quiz/FlashCard component
+    { id: '2', title: 'Algorithm Complexity Analysis', screen: 'AlgoAnalysis' }, // Will use Quiz component
+    { id: '3', title: 'Spot the Bug', screen: 'SpotTheBug' }, // Will use Quiz Component
     { id: '4', title: 'ProgoType', screen: 'ProgoType' },
   ];
 
