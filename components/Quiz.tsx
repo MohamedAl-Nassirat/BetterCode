@@ -1,22 +1,38 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
-const QuizComponent = ({ questions }) => {
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [showFeedback, setShowFeedback] = useState(false);
+interface Option {
+  optionText: string;
+  isCorrect: boolean;
+}
 
+interface Question {
+  questionText: string;
+  options: Option[];
+}
+
+interface QuizComponentProps {
+  questions: Question[];
+}
+
+const QuizComponent: React.FC<QuizComponentProps> = ({ questions }) => {
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [showFeedback, setShowFeedback] = useState<boolean>(false);
 
   const handleNextQuestion = () => {
     const nextQuestion = currentQuestionIndex + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestionIndex(nextQuestion);
+      setShowFeedback(false); // Reset feedback visibility for the next question
+      setSelectedOption(null); // Reset selected option for the next question
     } else {
       alert('Daily Quiz completed!'); // Placeholder completion action
     }
   };
 
-  const renderOption = (option, index) => {
+  const renderOption = (option: Option, index: number) => {
     return (
       <TouchableOpacity
         key={index}
@@ -24,11 +40,9 @@ const QuizComponent = ({ questions }) => {
         onPress={() => handleOptionPress(option)}
       >
         <Text style={styles.optionText}>{option.optionText}</Text>
-        
       </TouchableOpacity>
     );
   };
-
 
   const renderFeedback = () => {
     if (!showFeedback) return null; // No feedback to show
@@ -40,9 +54,7 @@ const QuizComponent = ({ questions }) => {
     }
   };
 
-  const handleOptionPress = (option) => {
-    // Here, you would handle the option selection
-    // For now, let's just alert the option chosen
+  const handleOptionPress = (option: Option) => {
     setSelectedOption(option);
     setShowFeedback(true);
   };

@@ -1,21 +1,30 @@
 import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-
+import { MaterialTopTabNavigationProp } from '@react-navigation/material-top-tabs';
 
 import DataStructures from './screens/DSA';
 import AlgoAnalysis from './screens/AlgorithmComplexity';
 import SpotTheBug from './screens/SpotTheBug';
 import ProgoType from './screens/ProgoType';
 
+type MenuItem = {
+  id: string;
+  title: string;
+  screen: string;
+};
 
 const Tab = createMaterialTopTabNavigator();
 
+// Define the props for HomeScreen, including navigation prop types
+interface HomeScreenProps {
+  navigation: MaterialTopTabNavigationProp<any>;
+}
+
 // The Home screen that shows the list of options
-function HomeScreen({ navigation }) {
-  const menuItems = [
+const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+  const menuItems: MenuItem[] = [
     { id: '1', title: 'DS&A Quick Quiz', screen: 'DataStructures' },
     { id: '2', title: 'Algorithm Complexity Analysis', screen: 'AlgoAnalysis' },
     { id: '3', title: 'Spot the Bug', screen: 'SpotTheBug' },
@@ -28,9 +37,7 @@ function HomeScreen({ navigation }) {
       <Text style={styles.introText}>Welcome to BetterCode, Where we help you CS</Text>
     </View>
   );
-}
-
-
+};
 
 export default function App() {
   return (
@@ -59,13 +66,12 @@ export default function App() {
           },
           tabBarIndicatorStyle: { height: 0 },
           swipeEnabled: true,
-        }}
-      >
-        <Tab.Screen name="DS&A" component={DataStructures} /> {/* Replace with ICON */}
-        <Tab.Screen name="Complexity" component={AlgoAnalysis} /> {/* Replace with ICON */}
-        <Tab.Screen name="Home" component={HomeScreen} /> {/* Replace with ICON */}
-        <Tab.Screen name="SpotTheBug" component={SpotTheBug} /> {/* Replace with ICON */}
-        <Tab.Screen name="ProgoType" component={ProgoType} /> {/* Replace with ICON */}
+        }}>
+        <Tab.Screen name="DS&A" component={DataStructures} />
+        <Tab.Screen name="Algo" component={AlgoAnalysis} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="SpotTheBug" component={SpotTheBug} />
+        <Tab.Screen name="ProgoType" component={ProgoType} />
       </Tab.Navigator>
     </NavigationContainer>
   );

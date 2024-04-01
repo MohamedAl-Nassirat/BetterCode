@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function ProgoType() {
+const ProgoType: React.FC = () => {
   return (
     <View style={styles.screenContainer}>
       <Text>ProgoType, the classic!</Text>
@@ -16,3 +16,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default ProgoType;
