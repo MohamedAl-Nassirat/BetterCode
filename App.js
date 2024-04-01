@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
 
 
 import DataStructures from './screens/DSA';
@@ -9,45 +10,63 @@ import AlgoAnalysis from './screens/AlgorithmComplexity';
 import SpotTheBug from './screens/SpotTheBug';
 import ProgoType from './screens/ProgoType';
 
+
+const Tab = createMaterialTopTabNavigator();
+
 // The Home screen that shows the list of options
 function HomeScreen({ navigation }) {
-
-
   const menuItems = [
-    { id: '1', title: 'DS&A Quick Quiz', screen: 'DataStructures' }, // Will use Quiz/FlashCard component
-    { id: '2', title: 'Algorithm Complexity Analysis', screen: 'AlgoAnalysis' }, // Will use Quiz component
-    { id: '3', title: 'Spot the Bug', screen: 'SpotTheBug' }, // Will use Quiz Component
+    { id: '1', title: 'DS&A Quick Quiz', screen: 'DataStructures' },
+    { id: '2', title: 'Algorithm Complexity Analysis', screen: 'AlgoAnalysis' },
+    { id: '3', title: 'Spot the Bug', screen: 'SpotTheBug' },
     { id: '4', title: 'ProgoType', screen: 'ProgoType' },
   ];
 
   return (
     <View style={{ flex: 1 }}> 
       <Text style={styles.pageTitle}>BetterCode</Text> 
-      <FlatList
-        data={menuItems}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate(item.screen)}>
-            <Text style={styles.title}>{item.title}</Text>
-          </TouchableOpacity>
-        )}
-      />
+      <Text style={styles.introText}>Welcome to BetterCode, Where we help you CS</Text>
     </View>
   );
 }
 
-const Stack = createStackNavigator();
+
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Welcome to better code" component={HomeScreen} />
-        <Stack.Screen name="DataStructures" component={DataStructures} />
-        <Stack.Screen name="AlgoAnalysis" component={AlgoAnalysis} />
-        <Stack.Screen name="SpotTheBug" component={SpotTheBug} />
-        <Stack.Screen name="ProgoType" component={ProgoType} />
-      </Stack.Navigator>
+      <Tab.Navigator
+        initialRouteName="Home"
+        tabBarPosition="bottom"
+        screenOptions={{
+          tabBarActiveTintColor: '#e91e63',
+          tabBarInactiveTintColor: 'gray',
+          tabBarStyle: {
+            backgroundColor: '#fff',
+            borderTopWidth: 0.5,
+            borderTopColor: 'grey',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            elevation: 5,
+            shadowOpacity: 0.1,
+            shadowRadius: 10,
+            height: 60
+          },
+          tabBarLabelStyle: {
+            fontSize: 12,
+          },
+          tabBarIndicatorStyle: { height: 0 },
+          swipeEnabled: true,
+        }}
+      >
+        <Tab.Screen name="DS&A" component={DataStructures} /> {/* Replace with ICON */}
+        <Tab.Screen name="Complexity" component={AlgoAnalysis} /> {/* Replace with ICON */}
+        <Tab.Screen name="Home" component={HomeScreen} /> {/* Replace with ICON */}
+        <Tab.Screen name="SpotTheBug" component={SpotTheBug} /> {/* Replace with ICON */}
+        <Tab.Screen name="ProgoType" component={ProgoType} /> {/* Replace with ICON */}
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
@@ -70,7 +89,13 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontSize: 30,
     textAlign: 'center',
-    padding: 100,
+    margin: 10,
+    padding: 80,
     color: 'blue',
+  },
+  introText: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'orange',
   },
 });

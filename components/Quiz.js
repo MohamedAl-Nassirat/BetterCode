@@ -12,7 +12,7 @@ const QuizComponent = ({ questions }) => {
     if (nextQuestion < questions.length) {
       setCurrentQuestionIndex(nextQuestion);
     } else {
-      alert('Quiz completed!'); // Placeholder completion action
+      alert('Daily Quiz completed!'); // Placeholder completion action
     }
   };
 
