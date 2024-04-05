@@ -9,11 +9,6 @@ import AlgoAnalysis from './screens/AlgorithmComplexity';
 import SpotTheBug from './screens/SpotTheBug';
 import ProgoType from './screens/ProgoType';
 
-type MenuItem = {
-  id: string;
-  title: string;
-  screen: string;
-};
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -23,14 +18,7 @@ interface HomeScreenProps {
 }
 
 // The Home screen that shows the list of options
-const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
-  const menuItems: MenuItem[] = [
-    { id: '1', title: 'DS&A Quick Quiz', screen: 'DataStructures' },
-    { id: '2', title: 'Algorithm Complexity Analysis', screen: 'AlgoAnalysis' },
-    { id: '3', title: 'Spot the Bug', screen: 'SpotTheBug' },
-    { id: '4', title: 'ProgoType', screen: 'ProgoType' },
-  ];
-
+const HomeScreen: React.FC<HomeScreenProps> = ( ) => {
   return (
     <View style={{ flex: 1 }}> 
       <Text style={styles.pageTitle}>BetterCode</Text> 

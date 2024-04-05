@@ -17,11 +17,13 @@ interface QuizComponentProps {
 
 const QuizComponent: React.FC<QuizComponentProps> = ({ questions }) => {
 
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [showFeedback, setShowFeedback] = useState<boolean>(false);
 
   const handleNextQuestion = () => {
+    // declare nextQuest type
     const nextQuestion = currentQuestionIndex + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestionIndex(nextQuestion);
