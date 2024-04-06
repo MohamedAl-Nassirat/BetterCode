@@ -25,6 +25,8 @@ const QuizComponent: React.FC<QuizComponentProps> = ({ questions }) => {
     if (nextQuestionIndex < questions.length) {
       setCurrentQuestionIndex(nextQuestionIndex);
     } else {
+      // We should probably do something else then just alerting the user
+      // Maybe navigate to a different screen or show a feedback mode?
       alert('You have completed the quiz!');
     }
     // Reset for the next question

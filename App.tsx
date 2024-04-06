@@ -22,7 +22,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ( ) => {
   return (
     <View style={{ flex: 1 }}> 
       <Text style={styles.pageTitle}>BetterCode</Text> 
-      <Text style={styles.introText}>Welcome to BetterCode, Where we help you CS</Text>
+      <Text style={styles.introText}>Welcome to BetterCode, all things DS&A</Text>
     </View>
   );
 };

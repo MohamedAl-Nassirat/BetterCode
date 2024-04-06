@@ -19,6 +19,8 @@ const commonComplexities = [
   'O(n^3)',
   'O(log n)',
   'O(n log n)',
+  'O(2^n)',
+  'O(n!)',
 ];
 
 const AlgorithmComplexity: React.FC = () => {
@@ -28,15 +30,17 @@ const AlgorithmComplexity: React.FC = () => {
   useEffect(() => {
     const getComplexityQuestions = async () => {
       try {
+                                  // API should be hosted somewhere else
         const response = await fetch('http://192.168.0.14:3000/complexity');
         const data = await response.json();
-        // Transform the data into the format expected by QuizComponent
+        // We need to transform the data into the format expected by Quiz.tsx
         const formattedQuestions: ComplexityQuestion[] = data.map((item: any) => {
           const correctOption = `Time: ${item.timeComplexity}`;
+          // TODO: Add Space complexity to the question
           const incorrectOptions = commonComplexities
             .filter(complexity => complexity !== item.timeComplexity)
-            .sort(() => 0.5 - Math.random()) // Randomize the array
-            .slice(0, 3) // Pick three random complexities
+            .sort(() => 0.5 - Math.random()) // Randomize the array, probably not the best way
+            .slice(0, 3) // Pick three random complexities, definitely not the best way
             .map(complexity => ({ optionText: `Time: ${complexity}`, isCorrect: false }));
 
           return {
@@ -44,7 +48,7 @@ const AlgorithmComplexity: React.FC = () => {
             options: [
               { optionText: correctOption, isCorrect: true },
               ...incorrectOptions,
-            ].sort(() => 0.5 - Math.random()), // Shuffle the combined options
+            ].sort(() => 0.5 - Math.random()), // Shuffle the combined options, definitely not the best way
           };
         });
         setQuestions(formattedQuestions);
@@ -81,7 +85,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#282c34',
     padding: 20,
   },
-  // Additional styles if needed
 });
 
 export default AlgorithmComplexity;

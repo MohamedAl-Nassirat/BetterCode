@@ -21,6 +21,7 @@ const DSA: React.FC = () => {
   useEffect(() => {
     const getQuestions = async () => {
       try {
+                                    // API should be hosted somewhere else
         const response = await fetch('http://192.168.0.14:3000/questions');
         const data = await response.json();
         setQuestions(data);
@@ -40,7 +41,6 @@ const DSA: React.FC = () => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
         <>
-          <Text>This section will have various Data Structures and Algorithm questions to help you prepare for your interviews</Text>
           {questions.length > 0 ? (
             <QuizComponent questions={questions} />
           ) : (
