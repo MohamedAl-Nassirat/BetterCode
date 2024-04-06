@@ -1,0 +1,5 @@
+- Integrate UI Libary https://tamagui.dev
+- Add Icons
+- Add Dark Mode
+- Fetch from API for questions, although there is no public api so we got to make
+one sadly

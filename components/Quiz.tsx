@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 
 interface Option {
   optionText: string;
@@ -60,7 +60,11 @@ const QuizComponent: React.FC<QuizComponentProps> = ({ questions }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.question}>{questions[currentQuestionIndex].questionText}</Text>
+      <View style={styles.codeContainer}>
+        <ScrollView nestedScrollEnabled={true}>
+          <Text style={styles.question}>{questions[currentQuestionIndex].questionText}</Text>
+        </ScrollView>
+      </View>
       <View style={styles.optionsContainer}>
         {questions[currentQuestionIndex].options.map(renderOption)}
       </View>
@@ -76,6 +80,11 @@ const QuizComponent: React.FC<QuizComponentProps> = ({ questions }) => {
 };
 
 const styles = StyleSheet.create({
+  codeContainer: {
+    maxHeight: 200, 
+    width: '100%',
+    marginBottom: 20,
+  },
   container: {
     flex: 1,
     padding: 20,
