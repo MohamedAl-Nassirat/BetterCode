@@ -14,7 +14,7 @@ Use BetterCode to enhance your software engineering interview preparation with a
 ## Technologies Used
 
 - **Frontend**: React Native for cross-platform mobile and web app development.
-- **Backend**: Node.js with Express for a scalable server-side solution.
+- **Backend**: Node.js with Express for a scalable server-side solution with TypeScript integration for type safety and improved code maintainability.
 - **Database**: MongoDB for flexible, scalable data storage.
 - **Additional Tools**:
   - React Navigation for seamless screen transitions and navigation.

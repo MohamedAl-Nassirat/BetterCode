@@ -12,15 +12,8 @@ const mongoURI = 'mongodb://localhost:27017/BetterCodeDB';
 mongoose.connect(mongoURI)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
-
-
-  
-
-
-
 app.use(express.json());
 app.get('/questions', async (req, res) => {
-
     const questions = await Question.find(); // Fetch all questions
     console.log(questions.length); 
     console.log(questions);
