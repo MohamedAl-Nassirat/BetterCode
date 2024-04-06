@@ -16,49 +16,46 @@ interface QuizComponentProps {
 }
 
 const QuizComponent: React.FC<QuizComponentProps> = ({ questions }) => {
-
-
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState<boolean>(false);
 
   const handleNextQuestion = () => {
-    // declare nextQuest type
-    const nextQuestion = currentQuestionIndex + 1;
-    if (nextQuestion < questions.length) {
-      setCurrentQuestionIndex(nextQuestion);
-      setShowFeedback(false); // Reset feedback visibility for the next question
-      setSelectedOption(null); // Reset selected option for the next question
+    const nextQuestionIndex = currentQuestionIndex + 1;
+    if (nextQuestionIndex < questions.length) {
+      setCurrentQuestionIndex(nextQuestionIndex);
     } else {
-      alert('Daily Quiz completed!'); // Placeholder completion action
+      alert('You have completed the quiz!');
     }
+    // Reset for the next question
+    setSelectedOptionIndex(null);
+    setShowFeedback(false);
+  };
+
+  const handleOptionPress = (index: number) => {
+    setSelectedOptionIndex(index);
+    setShowFeedback(true);
+  };
+
+  const isOptionSelected = (index: number): boolean => {
+    return index === selectedOptionIndex;
   };
 
   const renderOption = (option: Option, index: number) => {
+    let backgroundColor = isOptionSelected(index) && showFeedback
+      ? option.isCorrect ? 'green' : 'red'
+      : '#f0f0f0'; // Default background color
+
     return (
       <TouchableOpacity
         key={index}
-        style={styles.optionButton}
-        onPress={() => handleOptionPress(option)}
+        style={[styles.optionButton, { backgroundColor }]}
+        onPress={() => handleOptionPress(index)}
+        disabled={showFeedback}
       >
         <Text style={styles.optionText}>{option.optionText}</Text>
       </TouchableOpacity>
     );
-  };
-
-  const renderFeedback = () => {
-    if (!showFeedback) return null; // No feedback to show
-
-    if (selectedOption && selectedOption.isCorrect) {
-      return <Text style={styles.correctFeedback}>Correct</Text>;
-    } else {
-      return <Text style={styles.incorrectFeedback}>Incorrect</Text>;
-    }
-  };
-
-  const handleOptionPress = (option: Option) => {
-    setSelectedOption(option);
-    setShowFeedback(true);
   };
 
   return (
@@ -67,50 +64,60 @@ const QuizComponent: React.FC<QuizComponentProps> = ({ questions }) => {
       <View style={styles.optionsContainer}>
         {questions[currentQuestionIndex].options.map(renderOption)}
       </View>
-      {renderFeedback()}
-      <Button title="Next" onPress={handleNextQuestion} />
+      {showFeedback && selectedOptionIndex !== null && (
+        <Button
+          title="Next"
+          onPress={handleNextQuestion}
+          color={questions[currentQuestionIndex].options[selectedOptionIndex].isCorrect ? 'green' : 'red'}
+        />
+      )}
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
     justifyContent: 'center',
+    backgroundColor: '#f5f5f5',
   },
   question: {
     fontSize: 18,
     marginBottom: 20,
+    backgroundColor: 'black',
+    color: 'limegreen',
+    padding: 20,
+    borderRadius: 8,
   },
   optionsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    marginTop: 20,
   },
   optionButton: {
-    backgroundColor: '#f0f0f0',
-    padding: 10,
+    backgroundColor: '#e7e7e7',
+    padding: 15,
     margin: 5,
-    width: '45%', // Takes up roughly half the container, minus margin
+    width: '45%',
+    borderRadius: 20,
+    borderWidth: 1,
+    flexBasis: '45%',
+    borderColor: '#dcdcdc',
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    elevation: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
   },
   optionText: {
     textAlign: 'center',
-  },
-  correctFeedback: {
-    padding: 10,
-    backgroundColor: 'green',
-    color: 'white',
-    textAlign: 'center',
-    marginTop: 20,
-  },
-  incorrectFeedback: {
-    padding: 10,
-    backgroundColor: 'red',
-    color: 'white',
-    textAlign: 'center',
-    marginTop: 20,
+    fontSize: 16,
+    textAlignVertical: 'center',
   },
 });
 

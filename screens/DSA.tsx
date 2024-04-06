@@ -57,6 +57,21 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#f5f5f5', 
+  },
+  introText: {
+    color: '#333',
+    fontSize: 16,
+    margin: 20, 
+    textAlign: 'center',
+    padding: 20,
+    borderRadius: 8, 
+    backgroundColor: '#ffffff',
+    shadowOpacity: 0.3, 
+    shadowRadius: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    elevation: 3,
   },
 });
 

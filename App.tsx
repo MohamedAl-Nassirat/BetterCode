@@ -55,7 +55,7 @@ export default function App() {
           tabBarIndicatorStyle: { height: 0 },
           swipeEnabled: true,
         }}>
-        <Tab.Screen name="DS&A" component={DataStructures} />
+        <Tab.Screen name="DS" component={DataStructures} />
         <Tab.Screen name="Algo" component={AlgoAnalysis} />
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="SpotTheBug" component={SpotTheBug} />
